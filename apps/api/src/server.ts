@@ -45,15 +45,15 @@ fastify.register(cors, {
 fastify.register(Swagger, {
   swagger: {
     info: {
-      title: 'Functionary API',
-      description: 'Functionary API endpoint documentation',
+      title: 'Some API',
+      description: 'Some API endpoint documentation',
       version: '0.1.0',
     },
     externalDocs: {
-      url: 'https://functionary.run',
-      description: 'Trigger Zaps from user events',
+      url: 'https://some-url.com',
+      description: 'temp',
     },
-    host: 'functionary.run',
+    host: 'https://some-url.com',
     schemes: ['https'],
     consumes: ['application/json'],
     produces: ['application/json'],
@@ -77,11 +77,6 @@ fastify.addHook('onClose', async () => {
 })
 
 fastify.register(makeFastify, { stub: false })
-
-// fastify.addHook("onSend", async (req: FastifyRequest, reply: FastifyReply) => {
-//   reply.ctx.finishSentryTranscation()
-//   return
-// })
 
 fastify.listen({ port, host: '0.0.0.0' }, (err) => {
   if (err) throw err

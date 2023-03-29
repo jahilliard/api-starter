@@ -1,12 +1,12 @@
 {
   "extends": "tsconfig/base.json",
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts", "**/*.tsx", "types"],
   "exclude": ["node_modules"],
-  // https://github.com/vercel/turbo/discussions/620
   "compilerOptions": {
+    "types": ["jest", "node"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]
     }
-  },
+  }
 }
