@@ -1,37 +1,35 @@
-import os from "os";
+import os from 'os'
 
-import { pino } from "pino";
-import pretty from "pino-pretty";
+import { pino } from 'pino'
+import pretty from 'pino-pretty'
 
 const logger =
-  process.env.NODE_ENV === "production"
+  process.env.NODE_ENV === 'production'
     ? pino({
-        name: "Functionary Logger",
-        level: "info",
-        translateTime: "HH:MM:ss.l Z",
+        name: 'Functionary Logger',
+        level: 'info',
+        translateTime: 'HH:MM:ss.l Z',
       })
     : pino(
         {
-          name: "Functionary Logger",
-          level: "debug",
-          enabled: process.env.NODE_ENV !== "test",
-          translateTime: "HH:MM:ss.l Z",
+          name: 'Functionary Logger',
+          level: 'debug',
+          enabled: process.env.NODE_ENV !== 'test',
+          translateTime: 'HH:MM:ss.l Z',
         },
         pretty({
           levelFirst: true,
           colorize: true,
         })
-      );
+      )
 
 export class OurCtx {
   // protected _workspace: Workspace | null
 
-  logger: pino.Logger;
+  logger: pino.Logger
 
-  constructor(
-    opts: { requestId?: string; url?: string; timezoneOffset?: number } = {}
-  ) {
-    const { url, requestId, timezoneOffset } = opts;
+  constructor(opts: { requestId?: string; url?: string; timezoneOffset?: number } = {}) {
+    const { url, requestId, timezoneOffset } = opts
     this.logger = logger.child({
       base: {
         ...(url && { url }),
@@ -39,7 +37,7 @@ export class OurCtx {
         // pid: process.pid,
         hostname: os.hostname(),
       },
-    });
+    })
   }
 
   // get workspace(): Workspace {

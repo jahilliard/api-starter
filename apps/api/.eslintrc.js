@@ -3,8 +3,8 @@
  */
 module.exports = {
   root: true,
-  extends: ["custom"],
+  extends: ['custom'],
   parserOptions: {
-    project: "apps/api/tsconfig.json",
+    project: 'apps/api/tsconfig.json',
   },
-};
+}
