@@ -86,5 +86,5 @@ fastify.register(makeFastify, { stub: false })
 fastify.listen({ port, host: '0.0.0.0' }, (err) => {
   if (err) throw err
   // eslint-disable-next-line no-console
-  console.log(`\n\n\nReady on https://dev-slack-crm.localsymphony.io/\n\n\n`)
+  console.log(`\n\n\nReady on https://0.0.0.0:3000/\n\n\n`)
 })

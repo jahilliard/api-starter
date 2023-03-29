@@ -10,7 +10,10 @@ module.exports = {
   extends: ['plugin:prettier/recommended', 'plugin:import/recommended', 'plugin:import/typescript'],
   settings: {
     'import/resolver': {
-      typescript: true,
+      typescript: {
+        // https://github.com/import-js/eslint-plugin-import/issues/1485
+        project: ['apps/*/tsconfig.json', 'packages/*/tsconfig.json'],
+      },
       node: true,
     },
     // Help eslint-plugin-tailwindcss to parse Tailwind classes outside of className

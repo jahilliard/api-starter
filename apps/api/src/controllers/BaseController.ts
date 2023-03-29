@@ -1,63 +1,56 @@
-import type { FastifyReply, FastifyRequest } from "fastify";
+import type { FastifyReply, FastifyRequest } from 'fastify'
 
-import type { APIResponse } from "~/APIResponse";
-import {
-  APIError,
-  InternalServerError,
-  NotAuthenticated,
-  NotImplemented,
-} from "~/APIResponse";
-import type { IAuthDelegate } from "~/AuthDelegate";
-import { Closed } from "~/AuthDelegate";
+import type { APIResponse } from '~/APIResponse'
+import { APIError, InternalServerError, NotAuthenticated, NotImplemented } from '~/APIResponse'
+import type { IAuthDelegate } from '~/AuthDelegate'
+import { Closed } from '~/AuthDelegate'
 
 export abstract class Controller<SuccessAPIResponse extends APIResponse> {
-  authenticator: IAuthDelegate = new Closed();
+  // By default, we don't authenticate any requests.
+  authenticator: IAuthDelegate = new Closed()
 
-  async requestHandler(request, reply): Promise<APIError | SuccessAPIResponse> {
+  async requestHandler(request: FastifyRequest, reply: FastifyReply): Promise<APIError | SuccessAPIResponse> {
     try {
-      const wasAuthed = await this.authenticator.authenticate(request);
+      const wasAuthed = await this.authenticator.authenticate(request)
 
-      if (wasAuthed) {
-        const functReply = await this._requestHandler(request);
-        functReply.send(reply);
-        return functReply;
-      } else {
-        const authErr = new NotAuthenticated(
-          "Unable to authenticate the Request."
-        );
-        authErr.send(reply);
-        return authErr;
+      if (!wasAuthed) {
+        throw new NotAuthenticated('Unable to authenticate the Request.')
       }
+
+      const ourResponse = await this._requestHandler(request)
+      reply.ourResponse = ourResponse
+
+      reply.send(reply)
+      return ourResponse
     } catch (error) {
-      console.error(error.message);
-      if (error instanceof APIError) {
-        error.send(reply);
-        return error;
-      } else {
-        const serverErr = new InternalServerError(error.message);
-        serverErr.send(reply);
-        return serverErr;
+      const isKnownError = error instanceof APIError
+
+      if (!isKnownError) {
+        const serverErr = new InternalServerError((error as Error).message)
+        serverErr.send(reply)
+        return serverErr
       }
+
+      error.send(reply)
+      return error
     }
   }
 
-  async _requestHandler(request): Promise<SuccessAPIResponse> {
-    throw new NotImplemented("Request Handler Not implemented");
+  // eslint-disable-next-line
+  async _requestHandler(request: FastifyRequest): Promise<SuccessAPIResponse> {
+    throw new NotImplemented('Request Handler Not implemented')
   }
 
-  postRequestHandler: (
-    request: FastifyRequest,
-    fapiReply: FastifyReply,
-    functReply: APIResponse
-  ) => Promise<void> = async (request, fapiReply, functReply) => {
+  async postRequestHandler(request: FastifyRequest, reply: FastifyReply): Promise<void> {
     try {
-      await this._postRequestHandler(request, fapiReply, functReply);
+      await this._postRequestHandler(request, reply)
     } catch (error) {
-      request.OurCtx.logger.error(error.message);
+      request.ourCtx.logger.error((error as Error).message)
     }
-  };
+  }
 
-  async _postRequestHandler(request, fapiReply, functReply): Promise<void> {
-    throw new Error("Post Request Handler Not implemented");
+  // eslint-disable-next-line
+  async _postRequestHandler(request: FastifyRequest, reply: FastifyReply): Promise<void> {
+    throw new Error('Post Request Handler Not implemented')
   }
 }

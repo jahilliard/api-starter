@@ -4,7 +4,9 @@
 module.exports = {
   root: true,
   extends: ['custom'],
+  // https://github.com/vercel/turbo/discussions/620
   parserOptions: {
-    project: 'apps/api/tsconfig.json',
+    tsconfigRootDir: __dirname,
+    project: './tsconfig.json',
   },
 }

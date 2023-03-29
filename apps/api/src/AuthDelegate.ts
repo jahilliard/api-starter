@@ -7,13 +7,13 @@ export interface IAuthDelegate {
 }
 
 export class Open implements IAuthDelegate {
-  async authenticate(request: FastifyRequest): Promise<boolean> {
+  async authenticate(): Promise<boolean> {
     return true
   }
 }
 
 export class Closed implements IAuthDelegate {
-  async authenticate(request: FastifyRequest): Promise<boolean> {
+  async authenticate(): Promise<boolean> {
     return false
   }
 }
