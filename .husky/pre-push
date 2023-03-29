@@ -1,6 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn tsc
-yarn run lint
+yarn turbo run tsc
+# yarn turbo run lint
 # yarn run test

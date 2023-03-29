@@ -2,8 +2,8 @@
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
-    "lint": {
-      "outputs": []
+    "tsc": {
+      "cache": false
     },
     "dev": {
       "cache": false

@@ -2,7 +2,8 @@
   "name": "api",
   "version": "0.0.1",
   "scripts": {
-    "dev": "tsx src/server.ts --watch --watch-path=src/"
+    "dev": "tsx src/server.ts --watch --watch-path=src/",
+    "tsc": "tsc"
   },
   "engines": {
     "node": "18.x",
