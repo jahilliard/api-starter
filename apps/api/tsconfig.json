@@ -3,7 +3,7 @@
   "include": ["**/*.ts", "**/*.tsx", "types"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "types": ["jest", "node"],
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "~/*": ["./src/*"]

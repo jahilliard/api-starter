@@ -5,6 +5,12 @@
     "tsc": {
       "cache": false
     },
+    "test": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
     "dev": {
       "cache": false
     }
