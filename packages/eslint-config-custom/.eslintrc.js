@@ -20,9 +20,6 @@ module.exports = {
     // tailwindcss: {
     //   callees: ['tw'],
     // },
-    jest: {
-      version: 27,
-    },
   },
   rules: {
     'prettier/prettier': 'warn',

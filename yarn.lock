@@ -1226,6 +1226,14 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
+esbuild-ts-paths@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/esbuild-ts-paths/-/esbuild-ts-paths-1.1.3.tgz#8e84840fa7b2a45ca4a61fb2cd66d352bbc1e046"
+  integrity sha512-qV8WVCcMhQplEfqeu1VPa7llPL9NXpEES275z8z3FHhrescVKNzLSawGOINpmPTYo+WFUiKKLwSFcM0JoQQ5eg==
+  dependencies:
+    fast-glob "^3.2.11"
+    normalize-path "^3.0.0"
+
 esbuild@^0.17.14, esbuild@^0.17.5, esbuild@~0.17.6:
   version "0.17.14"
   resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.17.14.tgz#d61a22de751a3133f3c6c7f9c1c3e231e91a3245"
