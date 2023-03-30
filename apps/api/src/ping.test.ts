@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as fastify from 'fastify'
 
-import { makeFastify } from './make'
+import { makeFastify } from '~/make'
 
 describe('Ping-Pong test endpoint', () => {
   beforeAll(async () => {

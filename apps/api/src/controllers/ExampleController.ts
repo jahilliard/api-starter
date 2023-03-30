@@ -5,7 +5,7 @@ import type { FastifyRequest, FastifyTypeboxInstance, RawServerDefault, RouteGen
 import fp from 'fastify-plugin'
 import type { IncomingMessage } from 'http'
 
-import { APISuccess, BadRequest } from '~/APIResponse'
+import { APISuccess } from '~/APIResponse'
 import { PublicKey } from '~/AuthDelegate'
 import { Controller } from '~/controllers/BaseController'
 
@@ -46,11 +46,7 @@ class ExampleController extends Controller<APISuccess<ResponseType>> {
   authenticator = new PublicKey()
 
   async _requestHandler() {
-    // Handle logic after resopnse is sent
-    if (false) {
-      throw new BadRequest('x-source must be a string')
-    }
-    return new APISuccess({ response: { ok: true }, statusCode: 202 })
+    return new APISuccess({ response: { ok: true }, statusCode: 200 })
   }
 
   async _postRequestHandler() {
