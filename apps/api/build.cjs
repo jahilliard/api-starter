@@ -7,7 +7,7 @@ esbuild.build({
   platform: 'node',
   target: 'node18',
   entryPoints: ['src/server.ts'],
-  outdir: 'dist',
+  outdir: 'build',
   minify: true,
   sourcemap: true,
   plugins: [tsPaths('./tsconfig.json')],
